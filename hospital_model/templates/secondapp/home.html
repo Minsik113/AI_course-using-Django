@@ -1,0 +1,15 @@
+<h1>hihi</h1>
+{% if hospital_list %}
+    <ul>
+    {% for hospital in hospital_list %}
+        <li>
+            <!-- <a href="/secondapp/hospital/{{ hospital.id }}/"> -->
+            <a href="{% url 'polls:index2' hospital.id %}">
+                {{ hospital.name }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>더 없습니다.</p>
+{% endif %}

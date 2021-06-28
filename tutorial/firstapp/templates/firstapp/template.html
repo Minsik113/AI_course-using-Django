@@ -1,0 +1,27 @@
+{% extends 'firstapp/show.html' %}
+
+{% block content %}
+<h1>---------</h1>
+{% if num >= 5 %} <p>PASS - {{ num }}</p>
+{% else %} <p>FAIL - {{ num }}</p>
+{% endif %}
+<ul>
+    {% for i in list %}
+    <li>{{ i }}</li>
+    {% endfor %}
+</ul>
+
+<table>
+    <tr>
+        <td>번호</td>
+        <td>과목명</td>
+    </tr>
+    {% for i in curri %}
+    <tr>
+        <td>{{ i.id }}</td>
+        <td>{{ i.name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<h1>---------</h1>
+{% endblock %}

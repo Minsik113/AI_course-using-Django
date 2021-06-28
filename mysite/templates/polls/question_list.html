@@ -1,0 +1,51 @@
+{% load static %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css"
+    href="{% static 'style.css' %}">
+    <!-- /static/style.css 로 써도되지만 위처럼쓰는걸 제안함 -->
+<div class="container my-3">
+    <table class="table">
+        <thead>
+            <tr class="thead-dark">
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성일시</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if question_list %}
+            {% for question in question_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    <a href="{% url 'polls:detail' question.id %}">
+                        {{ question.subject }}
+                    </a>
+                </td>
+                <td>{{ question.pub_date }}</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="3">질문이 없습니다.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+{% if question_list %}
+    <ul>
+    {% for question in question_list %}
+    <li>
+        <!-- <a href="/polls/{{ question.id }}/"> -->
+        <a href="{% url 'polls:detail' question.id %}">
+            {{ question.subject }}
+        </a>
+    </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p> 질문이 없습니다. </p>
+{% endif %}
