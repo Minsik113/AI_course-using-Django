@@ -32,18 +32,4 @@
     </table>
 </div>
 
-{% if question_list %}
-    <ul>
-    {% for question in question_list %}
-    <li>
-        <!-- <a href="/polls/{{ question.id }}/"> -->
-        <a href="{% url 'polls:detail' question.id %}">
-            {{ question.subject }}
-        </a>
-    </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p> 질문이 없습니다. </p>
-{% endif %}
 {% endblock %}

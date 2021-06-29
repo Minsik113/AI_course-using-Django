@@ -4,7 +4,8 @@ from django.http import HttpResponse, JsonResponse
 from .models import Question
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-
+from .forms import QuestionForm
+from .forms import QuestionForm
 def index(request):
     question_list = Question.objects.order_by('-pub_date')
     return render(
@@ -33,3 +34,24 @@ def answer_create(request, question_id):
     # aa = request.POST.get('aa') # name=='aa'인 값을 post로 넘겼으니 여기서 쓸 수 있다?
     # return HttpResponse(aa)
     return redirect('polls:detail', question_id=question.id)
+
+
+def question_create(request):
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.pub_date = timezone.now()
+            question.save()
+        return redirect('polls:index')
+    else:
+        form = QuestionForm()
+        context = {'form': form}
+        return render(request, 'polls/question_form.html', context)
+
+# def question_create(request):
+#     form = QuestionForm()
+#     return render(
+#         request, 'polls/question_form.html', 
+#         {'form': form}
+#     )

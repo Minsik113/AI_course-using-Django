@@ -41,25 +41,4 @@
     </form>
 </div>
 
-<h1>{{ question.subject }}</h1>
-<div>
-    {{ question.content }}
-</div>
-<p>{{ question.answer_set.count }}개의 답변이 있습니다.</p>
-<ul>
-    {% for a in question.answer_set.all %}
-    <li>{{ a.content }}</li>
-    {%endfor%}
-</ul>
-<!-- /polls/answer/create/1/ -->
-<!-- /polls/answer/create/2/ -->
-<!-- /polls/answer/create/{{ question.id }} -->
-
-<form action="{% url 'polls:answer_create' question.id %}" method="post">
-
-    {% csrf_token %}
-    <input type="text" name='aa'>
-    <textarea name="content" id="content" rows="15"></textarea>
-    <input type="submit" value="답변 등록">
-</form>
 {% endblock %}
