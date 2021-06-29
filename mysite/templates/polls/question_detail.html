@@ -1,10 +1,6 @@
-{% load static %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+{% extends 'common/base.html' %}
 
-<link rel="stylesheet" type="text/css"
-    href="{% static 'style.css' %}">
-    <!-- /static/style.css 로 써도되지만 위처럼쓰는걸 제안함 -->
-
+{% block content %}
 <div class="container my-3">
     <h2 class="border-bottom py-2">{{ question.subject }}</h2>
     <div class="card my-3">
@@ -66,3 +62,4 @@
     <textarea name="content" id="content" rows="15"></textarea>
     <input type="submit" value="답변 등록">
 </form>
+{% endblock %}

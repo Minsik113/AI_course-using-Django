@@ -1,9 +1,6 @@
-{% load static %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+{% extends 'common/base.html' %}
 
-<link rel="stylesheet" type="text/css"
-    href="{% static 'style.css' %}">
-    <!-- /static/style.css 로 써도되지만 위처럼쓰는걸 제안함 -->
+{% block content %}
 <div class="container my-3">
     <table class="table">
         <thead>
@@ -49,3 +46,4 @@
 {% else %}
     <p> 질문이 없습니다. </p>
 {% endif %}
+{% endblock %}
