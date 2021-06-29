@@ -1,9 +1,19 @@
 {% load static %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<link rel="stylesheet" type="text/css"
-    href="{% static 'style.css' %}">
-    <!-- /static/style.css 로 써도되지만 위처럼쓰는걸 제안함 -->
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<!-- /static/style.css 로 써도되지만 위처럼쓰는걸 제안함 -->
 
+<!-- js START-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- js END -->
+
+<!-- 네비게이션바 -->
+{% include 'common/navbar.html' %}
+
+<!-- 기본 템플릿 START-->
 {% block content %}
 {% endblock %}
+<!-- 기본 템플릿 END -->
