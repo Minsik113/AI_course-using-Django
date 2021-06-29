@@ -1,11 +1,24 @@
-from django.http.response import JsonResponse
 from polls.models import Question
 from django.http import HttpResponse, JsonResponse
 from .models import Question
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .forms import QuestionForm
-from .forms import QuestionForm
+from django.contrib.auth import authenticate, login
+from .forms import UserForm
+
+from django.contrib.auth.models import User
+def check(request):
+    name = request.GET.get('username')
+    # u = User.obejcts.get(username=name)
+    # return JsonResponse({'result:': 'u.username'})
+    try:
+        u = User.objects.get(username=name)
+        result = False
+    except:
+        result = True
+    return JsonResponse({'result': result})
+
 def index(request):
     question_list = Question.objects.order_by('-pub_date')
     return render(
@@ -35,7 +48,6 @@ def answer_create(request, question_id):
     # return HttpResponse(aa)
     return redirect('polls:detail', question_id=question.id)
 
-
 def question_create(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
@@ -50,9 +62,19 @@ def question_create(request):
     context = {'form': form}
     return render(request, 'polls/question_form.html', context)
 
-# def question_create(request):
-#     form = QuestionForm()
-#     return render(
-#         request, 'polls/question_form.html', 
-#         {'form': form}
-#     )
+def signup(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('polls:index') # redirect의 url의 name으로 접근하는방법이 이렇게 됨.
+    else:
+        form = UserForm()
+    return render(request, 'signup.html', {'form': form})
+

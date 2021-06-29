@@ -25,7 +25,9 @@ SECRET_KEY = 'l#s%ox6f$&*@lf#@w=aj5=3n2jb0p)k@1a9f)3b)8zlpfc&#br'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1', 'django_venv.pythonanywhere.com'
+]
 
 
 # Application definition
@@ -123,7 +125,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+#-------- 우리가 만든거 -----------
 STATICFILES_DIRS = [
     # BASE_DIR / 'static'  # django3.0이상에서
     os.path.join(BASE_DIR, 'static')
 ]
+
+LOGIN_REDIRECT_URL = '/login/'
+LOGOUT_REDIRECT_URL = '/login/'
