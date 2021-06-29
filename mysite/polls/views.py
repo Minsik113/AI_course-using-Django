@@ -43,11 +43,12 @@ def question_create(request):
             question = form.save(commit=False)
             question.pub_date = timezone.now()
             question.save()
-        return redirect('polls:index')
+            return redirect('polls:index')
     else:
         form = QuestionForm()
-        context = {'form': form}
-        return render(request, 'polls/question_form.html', context)
+        
+    context = {'form': form}
+    return render(request, 'polls/question_form.html', context)
 
 # def question_create(request):
 #     form = QuestionForm()
